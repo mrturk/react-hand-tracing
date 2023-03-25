@@ -9,7 +9,7 @@ const handsfree = new Handsfree({
     hands: true,
 })
 handsfree.plugin.palmPointers.enable()
-handsfree.plugin.palmPointers.speed = { x: 2, y: 2 }
+handsfree.plugin.palmPointers.speed = { x: 5, y: 5 }
 
 
 const HandTracing = () => {
@@ -43,16 +43,16 @@ const HandTracing = () => {
 
         handsfree.use('logger', ({ hands }) => {
             if (!hands.pinchState) return
-            if (hands.pinchState[0][0] === "held") {
+            if (hands.pinchState[0][0] !== "") {
                 setColor("red")
             }
-            if (hands.pinchState[0][1] === "held") {
+            if (hands.pinchState[0][1] !== "") {
                 setColor("yellow")
             }
-            if (hands.pinchState[0][2] === "held") {
+            if (hands.pinchState[0][2] !== "") {
                 setColor("black")
             }
-            if (hands.pinchState[0][3] === "held") {
+            if (hands.pinchState[0][3] !== "") {
                 setColor("blue")
             }
             if (!hands.pointer) return
@@ -74,7 +74,7 @@ const HandTracing = () => {
 
         if (started) {
             intervalID = setInterval(() => {
-                setBoxY(countInterval => countInterval + 10);
+                setBoxY(countInterval => countInterval + 10 + (score + 1) * 1.2);
                 console.log('box', box1Ref.current?.offsetLeft)
                 console.log('board', boardRef.current?.offsetLeft)
 
