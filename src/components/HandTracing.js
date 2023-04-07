@@ -11,6 +11,8 @@ const handsfree = new Handsfree({
 handsfree.plugin.palmPointers.enable();
 handsfree.plugin.palmPointers.speed = { x: 5, y: 5 };
 
+let check = false;
+
 const HandTracing = () => {
   let intervalID;
   const [x, setX] = useState(0);
@@ -38,8 +40,8 @@ const HandTracing = () => {
 
   const handControl = () => {
     handsfree.use("logger", ({ hands }) => {
-      if (hands || !started) {
-        console.log("yunus");
+      if (hands && !check) {
+        check = true;
         setLoading(false);
         setStarted(true);
       }
@@ -57,7 +59,6 @@ const HandTracing = () => {
         setColor("blue");
       }
       if (!hands.pointer) return;
-      console.log(hands.pointer[1]?.isVisible);
       if (hands.pointer[0]?.isVisible) {
         if (hands.pointer[0].x > 1300) {
           setX(1300);

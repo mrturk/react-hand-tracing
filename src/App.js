@@ -1,10 +1,8 @@
-
-import HandTracing from './components/HandTracing';
+import HandTracing from "./components/HandTracing";
+import WebFaceDetection from "./components/WebFaceDetection";
 
 function App() {
-
-
-  return <HandTracing />
+  return <WebFaceDetection />;
 }
 
 export default App;
